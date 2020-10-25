@@ -1,0 +1,164 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "ngx-highcharts": {
+      "projectType": "library",
+      "root": "projects/ngx-highcharts",
+      "sourceRoot": "projects/ngx-highcharts/src",
+      "prefix": "vlahio",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/ngx-highcharts/tsconfig.lib.json",
+            "project": "projects/ngx-highcharts/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-highcharts/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-highcharts/src/test.ts",
+            "tsConfig": "projects/ngx-highcharts/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-highcharts/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngx-highcharts/tsconfig.lib.json",
+              "projects/ngx-highcharts/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "ngx-highcharts-test": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/ngx-highcharts-test",
+      "sourceRoot": "projects/ngx-highcharts-test/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/ngx-highcharts-test",
+            "index": "projects/ngx-highcharts-test/src/index.html",
+            "main": "projects/ngx-highcharts-test/src/main.ts",
+            "polyfills": "projects/ngx-highcharts-test/src/polyfills.ts",
+            "tsConfig": "projects/ngx-highcharts-test/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/ngx-highcharts-test/src/favicon.ico",
+              "projects/ngx-highcharts-test/src/assets"
+            ],
+            "styles": [
+              "projects/ngx-highcharts-test/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/ngx-highcharts-test/src/environments/environment.ts",
+                  "with": "projects/ngx-highcharts-test/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "ngx-highcharts-test:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "ngx-highcharts-test:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ngx-highcharts-test:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-highcharts-test/src/test.ts",
+            "polyfills": "projects/ngx-highcharts-test/src/polyfills.ts",
+            "tsConfig": "projects/ngx-highcharts-test/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-highcharts-test/karma.conf.js",
+            "assets": [
+              "projects/ngx-highcharts-test/src/favicon.ico",
+              "projects/ngx-highcharts-test/src/assets"
+            ],
+            "styles": [
+              "projects/ngx-highcharts-test/src/styles.css"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngx-highcharts-test/tsconfig.app.json",
+              "projects/ngx-highcharts-test/tsconfig.spec.json",
+              "projects/ngx-highcharts-test/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/ngx-highcharts-test/e2e/protractor.conf.js",
+            "devServerTarget": "ngx-highcharts-test:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "ngx-highcharts-test:serve:production"
+            }
+          }
+        }
+      }
+    }},
+  "defaultProject": "ngx-highcharts"
+}
